@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+sales_data = np.array([
+    [120, 130, 125],
+    [200, 210, 190],
+    [150, 160, 155]
+])
+
+average_price = np.mean(sales_data)
+print("Average price of all products sold:", average_price)
+
+products = ["Product 1", "Product 2", "Product 3"]
+average_per_product = np.mean(sales_data, axis=1)
+
+plt.figure(figsize=(7, 5))
+bars = plt.bar(products, average_per_product, color='lightgreen')
+
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, height + 0.5, f'{height:.2f}', ha='center')
+
+plt.title("Average Price per Product")
+plt.xlabel("Products")
+plt.ylabel("Average Price")
+plt.ylim(0, np.max(average_per_product) + 20)
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.show()
