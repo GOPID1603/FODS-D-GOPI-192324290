@@ -1,0 +1,26 @@
+import numpy as np
+import pandas as pd
+import scipy.stats as stats
+
+data = pd.read_csv('rare_elements.csv')
+concentrations = data.iloc[:,0]
+
+sample_size = int(input("Enter sample size: "))
+confidence_level = float(input("Enter confidence level (e.g., 0.95): "))
+precision = float(input("Enter desired precision: "))
+
+sample = concentrations.sample(sample_size)
+mean = sample.mean()
+std = sample.std(ddof=1)
+sem = std / np.sqrt(sample_size)
+
+t_val = stats.t.ppf((1 + confidence_level) / 2, df=sample_size-1)
+margin = t_val * sem
+
+print(f"Sample mean: {mean:.4f}")
+print(f"{int(confidence_level*100)}% confidence interval: ({mean - margin:.4f}, {mean + margin:.4f})")
+
+if margin <= precision:
+    print("Desired precision achieved.")
+else:
+    print("Desired precision NOT achieved, consider larger sample.")
