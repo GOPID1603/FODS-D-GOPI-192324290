@@ -1,0 +1,36 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample order_data DataFrame for demonstration
+order_data = pd.DataFrame({
+    'customer ID': ['C1', 'C2', 'C1', 'C3', 'C2', 'C1'],
+    'order date': pd.to_datetime(['2023-06-01', '2023-06-03', '2023-06-05', '2023-06-07', '2023-06-10', '2023-06-12']),
+    'product name': ['ProdA', 'ProdB', 'ProdA', 'ProdC', 'ProdB', 'ProdA'],
+    'order quantity': [5, 3, 2, 7, 1, 4]
+})
+
+orders_per_customer = order_data.groupby('customer ID').size()
+avg_quantity_per_product = order_data.groupby('product name')['order quantity'].mean()
+earliest_date = order_data['order date'].min()
+latest_date = order_data['order date'].max()
+
+print("Orders per customer:\n", orders_per_customer)
+print("Average quantity per product:\n", avg_quantity_per_product)
+print("Earliest order date:", earliest_date)
+print("Latest order date:", latest_date)
+
+plt.figure(figsize=(8,4))
+orders_per_customer.plot(kind='bar', color='skyblue')
+plt.title("Total Number of Orders per Customer")
+plt.xlabel("Customer ID")
+plt.ylabel("Number of Orders")
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.show()
+
+plt.figure(figsize=(8,4))
+avg_quantity_per_product.plot(kind='bar', color='lightgreen')
+plt.title("Average Order Quantity per Product")
+plt.xlabel("Product Name")
+plt.ylabel("Average Quantity")
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.show()
