@@ -1,0 +1,18 @@
+import numpy as np
+import scipy.stats as stats
+
+# Sample data (replace with actual data)
+drug_group = np.random.normal(loc=10, scale=5, size=50)      # mean reduction 10 mmHg
+placebo_group = np.random.normal(loc=5, scale=5, size=50)    # mean reduction 5 mmHg
+
+def conf_interval(data, confidence=0.95):
+    mean = np.mean(data)
+    sem = stats.sem(data)
+    margin = sem * stats.t.ppf((1 + confidence) / 2, len(data)-1)
+    return mean, mean - margin, mean + margin
+
+drug_mean, drug_lower, drug_upper = conf_interval(drug_group)
+placebo_mean, place_lower, place_upper = conf_interval(placebo_group)
+
+print(f"Drug group 95% CI: {drug_lower:.2f} to {drug_upper:.2f} (mean={drug_mean:.2f})")
+print(f"Placebo group 95% CI: {place_lower:.2f} to {place_upper:.2f} (mean={placebo_mean:.2f})")
