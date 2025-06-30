@@ -1,0 +1,35 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import scipy.stats as stats
+
+data = {
+    'age': [25, 30, 35, 40, 28, 32, 45, 50, 27, 31, 36, 42, 29, 33, 38, 43, 47, 52],
+    'fat': [20, 22, 24, 21, 23, 25, 26, 27, 20, 22, 23, 24, 21, 23, 25, 26, 27, 28]
+}
+df = pd.DataFrame(data)
+
+print("Mean:\n", df.mean())
+print("Median:\n", df.median())
+print("Std Dev:\n", df.std())
+
+plt.figure(figsize=(10,4))
+plt.subplot(1,2,1)
+sns.boxplot(y=df['age'])
+plt.title('Boxplot of Age')
+
+plt.subplot(1,2,2)
+sns.boxplot(y=df['fat'])
+plt.title('Boxplot of % Fat')
+plt.show()
+
+plt.figure(figsize=(6,6))
+plt.scatter(df['age'], df['fat'])
+plt.xlabel('Age')
+plt.ylabel('% Fat')
+plt.title('Scatter plot of Age vs % Fat')
+plt.show()
+
+stats.probplot(df['fat'], dist="norm", plot=plt)
+plt.title('Q-Q plot of % Fat')
+plt.show()
