@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+fuel_efficiency = np.array([25, 30, 28, 35, 40])
+
+average_efficiency = np.mean(fuel_efficiency)
+percentage_improvement = ((fuel_efficiency[4] - fuel_efficiency[0]) / fuel_efficiency[0]) * 100
+
+print("Average fuel efficiency:", average_efficiency)
+print("Percentage improvement from Car 1 to Car 5:", percentage_improvement, "%")
+
+car_models = ["Car 1", "Car 2", "Car 3", "Car 4", "Car 5"]
+
+plt.figure(figsize=(8,5))
+bars = plt.bar(car_models, fuel_efficiency, color='lightseagreen')
+bars[0].set_color('red')
+bars[4].set_color('green')
+
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, height + 0.5, f'{height:.1f}', ha='center')
+
+plt.title("Fuel Efficiency of Car Models (MPG)")
+plt.xlabel("Car Models")
+plt.ylabel("Fuel Efficiency (MPG)")
+plt.ylim(0, max(fuel_efficiency) + 5)
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.show()
