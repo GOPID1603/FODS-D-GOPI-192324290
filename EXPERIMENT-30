@@ -1,0 +1,33 @@
+import pandas as pd
+from sklearn.tree import DecisionTreeRegressor, export_text
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = {'mileage': [20000, 30000, 40000, 25000, 35000],
+        'age': [3, 4, 5, 2, 3],
+        'price': [15000, 12000, 10000, 16000, 13000]}
+df = pd.DataFrame(data)
+
+X = df[['mileage', 'age']]
+y = df['price']
+
+model = DecisionTreeRegressor()
+model.fit(X, y)
+
+mileage = float(input("Enter car mileage: "))
+age = float(input("Enter car age (years): "))
+sample = np.array([[mileage, age]])
+pred_price = model.predict(sample)
+
+print(f"Predicted price: ${pred_price[0]:.2f}")
+
+tree_rules = export_text(model, feature_names=['mileage', 'age'])
+print("Decision path:\n", tree_rules)
+
+plt.scatter(df['mileage'], df['price'], c='blue', label='Data points')
+plt.scatter(mileage, pred_price, color='red', s=150, label='Prediction')
+plt.xlabel('Mileage')
+plt.ylabel('Price')
+plt.title('Car Price Prediction')
+plt.legend()
+plt.show()
