@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+sales_data = np.array([150000, 175000, 200000, 250000])
+
+total_sales = np.sum(sales_data)
+percentage_increase = ((sales_data[3] - sales_data[0]) / sales_data[0]) * 100
+
+print("Total sales for the year:", total_sales)
+print("Percentage increase from Q1 to Q4:", percentage_increase, "%")
+
+quarters = ["Q1", "Q2", "Q3", "Q4"]
+
+plt.figure(figsize=(8, 5))
+bars = plt.bar(quarters, sales_data, color='lightblue')
+bars[0].set_color('red')
+bars[3].set_color('green')
+
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, height + 5000, f'{height:.0f}', ha='center')
+
+plt.title("Quarterly Sales Performance")
+plt.xlabel("Quarters")
+plt.ylabel("Sales Amount")
+plt.ylim(0, np.max(sales_data) + 30000)
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.show()
