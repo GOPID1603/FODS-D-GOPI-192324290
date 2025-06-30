@@ -1,0 +1,20 @@
+import numpy as np
+from scipy import stats
+
+# Example conversion rates (1=converted, 0=not)
+group_A = np.random.binomial(1, 0.12, 1000)
+group_B = np.random.binomial(1, 0.15, 1000)
+
+mean_A = np.mean(group_A)
+mean_B = np.mean(group_B)
+
+t_stat, p_value = stats.ttest_ind(group_A, group_B)
+
+print(f"Mean Conversion A: {mean_A:.3f}")
+print(f"Mean Conversion B: {mean_B:.3f}")
+print(f"P-value: {p_value:.4f}")
+
+if p_value < 0.05:
+    print("Statistically significant difference between groups.")
+else:
+    print("No statistically significant difference between groups.")
