@@ -1,0 +1,16 @@
+import pandas as pd
+
+# Sample data
+data = {'customer_id': [1,2,3,4,5,6,7],
+        'age': [25, 30, 25, 40, 35, 30, 25]}
+order_data = pd.DataFrame(data)
+
+age_freq = order_data['age'].value_counts().sort_index()
+
+print(age_freq)
+
+age_freq.plot(kind='bar', color='purple', figsize=(7,4), title='Age Frequency Distribution')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.show()
