@@ -1,0 +1,19 @@
+from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
+
+# Example data (features: symptom1, symptom2)
+X = np.array([[1,2], [2,3], [3,4], [6,5], [7,8], [8,9]])
+y = np.array([0,0,0,1,1,1])
+
+knn = KNeighborsClassifier()
+
+knn.fit(X, y)
+
+symptom1 = float(input("Enter symptom1 value: "))
+symptom2 = float(input("Enter symptom2 value: "))
+k = int(input("Enter k value: "))
+
+knn.n_neighbors = k
+prediction = knn.predict([[symptom1, symptom2]])
+
+print("Prediction (0=No condition, 1=Condition):", prediction[0])
