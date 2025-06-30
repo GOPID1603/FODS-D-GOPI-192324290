@@ -1,0 +1,16 @@
+import numpy as np
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+
+np.random.seed(0)
+treatment = np.random.normal(120, 10, 50)
+placebo = np.random.normal(130, 10, 50)
+
+t_stat, p_value = stats.ttest_ind(treatment, placebo)
+
+print(f"T-statistic: {t_stat:.3f}, P-value: {p_value:.4f}")
+
+plt.boxplot([treatment, placebo], labels=['Treatment', 'Placebo'])
+plt.title("Blood Pressure Distribution")
+plt.ylabel("Blood Pressure")
+plt.show()
