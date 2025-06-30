@@ -1,0 +1,30 @@
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = {'area': [1500, 1700, 2000, 2100, 2500],
+        'bedrooms': [3, 4, 3, 4, 5],
+        'price': [300000, 350000, 400000, 420000, 500000]}
+df = pd.DataFrame(data)
+
+X = df[['area']]
+y = df['price']
+
+model = LinearRegression()
+model.fit(X, y)
+
+area = float(input("Enter area (sq ft): "))
+bedrooms = int(input("Enter number of bedrooms (ignored in plot): "))
+predicted_price = model.predict([[area]])
+
+print(f"Predicted house price: ${predicted_price[0]:.2f}")
+
+plt.scatter(df['area'], df['price'], color='blue', label='Data points')
+plt.plot(df['area'], model.predict(df[['area']]), color='red', label='Regression line')
+plt.scatter(area, predicted_price, color='green', s=100, label='Input Prediction')
+plt.xlabel('Area (sq ft)')
+plt.ylabel('Price')
+plt.title('House Price Prediction')
+plt.legend()
+plt.show()
