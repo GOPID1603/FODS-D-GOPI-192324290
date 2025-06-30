@@ -1,0 +1,26 @@
+import numpy as np
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+# Sample customer features: purchase frequency, total spent
+data = np.array([
+    [5, 500],
+    [6, 600],
+    [1, 150],
+    [2, 200],
+    [7, 700],
+    [3, 400],
+    [4, 450]
+])
+
+k = 3
+model = KMeans(n_clusters=k)
+model.fit(data)
+
+labels = model.labels_
+
+plt.scatter(data[:,0], data[:,1], c=labels, cmap='viridis', s=100)
+plt.xlabel('Purchase Frequency')
+plt.ylabel('Total Spent')
+plt.title('Customer Segmentation Clusters')
+plt.show()
