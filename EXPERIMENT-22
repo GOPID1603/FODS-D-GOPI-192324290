@@ -1,0 +1,17 @@
+import pandas as pd
+import scipy.stats as stats
+import numpy as np
+
+data = pd.read_csv('customer_reviews.csv')
+ratings = data['rating']
+
+mean = ratings.mean()
+std = ratings.std(ddof=1)
+n = len(ratings)
+confidence = 0.95
+sem = std / np.sqrt(n)
+t_val = stats.t.ppf((1 + confidence) / 2, n-1)
+margin = t_val * sem
+
+print(f"Mean rating: {mean:.3f}")
+print(f"{int(confidence*100)}% confidence interval: ({mean - margin:.3f}, {mean + margin:.3f})")
