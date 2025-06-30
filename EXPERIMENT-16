@@ -1,0 +1,15 @@
+from collections import Counter
+import re
+
+reviews = [
+    "This product is great!",
+    "I love this product, great quality.",
+    "Not happy with the product.",
+    "Great value for the price."
+]
+
+all_text = " ".join(reviews).lower()
+words = re.findall(r'\b\w+\b', all_text)
+freq_dist = Counter(words)
+
+print(freq_dist)
