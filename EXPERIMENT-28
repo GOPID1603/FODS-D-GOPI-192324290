@@ -1,0 +1,23 @@
+import numpy as np
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+X = np.array([[500, 5], [600, 6], [150, 1], [200, 2], [700, 7]])
+
+k = int(input("Enter number of clusters (k): "))
+model = KMeans(n_clusters=k)
+model.fit(X)
+
+total_spent = float(input("Enter total spent: "))
+frequency = float(input("Enter purchase frequency: "))
+
+label = model.predict([[total_spent, frequency]])
+print(f"Customer segment: {label[0]}")
+
+plt.scatter(X[:, 0], X[:, 1], c=model.labels_, cmap='viridis', s=100, label='Customers')
+plt.scatter(total_spent, frequency, color='red', edgecolors='k', s=150, label='New Customer')
+plt.xlabel('Total Spent')
+plt.ylabel('Purchase Frequency')
+plt.title('Customer Segmentation with K-Means')
+plt.legend()
+plt.show()
