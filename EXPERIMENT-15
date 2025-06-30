@@ -1,0 +1,16 @@
+import pandas as pd
+
+# Sample data
+likes_data = {'post_id': [1,2,3,4,5,6,7,8],
+              'likes': [10, 15, 10, 5, 15, 20, 10, 5]}
+likes_df = pd.DataFrame(likes_data)
+
+likes_freq = likes_df['likes'].value_counts().sort_index()
+
+print(likes_freq)
+
+likes_freq.plot(kind='bar', color='teal', figsize=(7,4), title='Likes Frequency Distribution')
+plt.xlabel('Number of Likes')
+plt.ylabel('Frequency')
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.show()
