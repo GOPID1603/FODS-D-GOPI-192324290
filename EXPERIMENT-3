@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+house_data = np.array([
+    [3, 1500, 250000],
+    [5, 3000, 500000],
+    [4, 2000, 350000],
+    [6, 4000, 750000],
+    [5, 3200, 550000]
+])
+
+filter_bedrooms = house_data[:, 0] > 4
+filtered_prices = house_data[filter_bedrooms, 2]
+average_price = np.mean(filtered_prices)
+
+print("Average sale price of houses with more than 4 bedrooms:", average_price)
+
+filtered_bedrooms = house_data[filter_bedrooms, 0]
+
+plt.figure(figsize=(8, 5))
+bars = plt.bar(range(len(filtered_prices)), filtered_prices, color='lightcoral')
+
+for i, bar in enumerate(bars):
+    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 5000, f'{bar.get_height():.0f}', ha='center')
+
+plt.title("Sale Prices of Houses with More Than 4 Bedrooms")
+plt.xlabel("House Index")
+plt.ylabel("Sale Price")
+plt.ylim(0, np.max(filtered_prices) + 50000)
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.show()
