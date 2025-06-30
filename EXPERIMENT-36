@@ -1,0 +1,21 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample stock data
+data = {'day': list(range(1, 11)),
+        'closing_price': [100, 102, 98, 105, 110, 108, 107, 112, 115, 113]}
+df = pd.DataFrame(data)
+
+mean_price = df['closing_price'].mean()
+std_price = df['closing_price'].std()
+print(f"Mean Price: {mean_price:.2f}")
+print(f"Standard Deviation: {std_price:.2f}")
+
+plt.plot(df['day'], df['closing_price'], marker='o', color='blue', label='Closing Price')
+plt.axhline(mean_price, color='red', linestyle='--', label='Mean Price')
+plt.title('Stock Price Movement Over Time')
+plt.xlabel('Day')
+plt.ylabel('Closing Price')
+plt.legend()
+plt.grid()
+plt.show()
