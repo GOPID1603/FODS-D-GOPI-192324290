@@ -1,0 +1,23 @@
+import numpy as np
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+data = np.array([
+    [500, 10],
+    [600, 12],
+    [150, 3],
+    [200, 4],
+    [700, 15],
+    [450, 8],
+    [480, 9]
+])
+
+k = 3
+model = KMeans(n_clusters=k)
+model.fit(data)
+
+plt.scatter(data[:, 0], data[:, 1], c=model.labels_, cmap='plasma', s=100)
+plt.xlabel('Total Amount Spent')
+plt.ylabel('Number of Items Purchased')
+plt.title('Customer Segmentation by Spending Behavior')
+plt.show()
