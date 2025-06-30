@@ -1,0 +1,23 @@
+property_data = pd.DataFrame({
+    'property ID': [1, 2, 3, 4, 5],
+    'location': ['LocA', 'LocB', 'LocA', 'LocC', 'LocB'],
+    'number of bedrooms': [3, 5, 4, 6, 5],
+    'area in square feet': [1500, 2500, 1800, 3000, 2200],
+    'listing price': [300000, 500000, 350000, 750000, 550000]
+})
+
+avg_price_per_location = property_data.groupby('location')['listing price'].mean()
+num_properties_4plus = property_data[property_data['number of bedrooms'] > 4].shape[0]
+largest_area_property = property_data.loc[property_data['area in square feet'].idxmax()]
+
+print("Average price per location:\n", avg_price_per_location)
+print("Number of properties with >4 bedrooms:", num_properties_4plus)
+print("Property with largest area:\n", largest_area_property)
+
+plt.figure(figsize=(8,4))
+avg_price_per_location.plot(kind='bar', color='mediumslateblue')
+plt.title("Average Listing Price per Location")
+plt.xlabel("Location")
+plt.ylabel("Average Listing Price")
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.show()
