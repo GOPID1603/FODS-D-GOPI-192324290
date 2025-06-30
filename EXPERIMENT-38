@@ -1,0 +1,23 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {'City': ['CityA', 'CityB', 'CityC'],
+        'MeanTemp': [25, 28, 22],
+        'StdDev': [3, 4, 2],
+        'MaxTemp': [30, 35, 27],
+        'MinTemp': [20, 23, 18]}
+df = pd.DataFrame(data)
+
+df['Range'] = df['MaxTemp'] - df['MinTemp']
+most_consistent = df.loc[df['StdDev'].idxmin(), 'City']
+largest_range_city = df.loc[df['Range'].idxmax(), 'City']
+
+print(f"City with largest temperature range: {largest_range_city}")
+print(f"Most consistent temperature city: {most_consistent}")
+
+plt.bar(df['City'], df['MeanTemp'], color='orange', label='Mean Temp')
+plt.errorbar(df['City'], df['MeanTemp'], yerr=df['StdDev'], fmt='o', color='black', label='Std Dev')
+plt.title('City Temperature Analysis')
+plt.ylabel('Temperature (°C)')
+plt.legend()
+plt.show()
