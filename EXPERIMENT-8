@@ -1,0 +1,10 @@
+top_5_products = order_data.groupby('product name')['order quantity'].sum().nlargest(5)
+print("Top 5 products sold:\n", top_5_products)
+
+plt.figure(figsize=(8,4))
+top_5_products.plot(kind='bar', color='coral')
+plt.title("Top 5 Products Sold")
+plt.xlabel("Product Name")
+plt.ylabel("Total Quantity Sold")
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.show()
