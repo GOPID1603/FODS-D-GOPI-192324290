@@ -1,0 +1,26 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {'Name': ['Player1', 'Player2', 'Player3', 'Player4', 'Player5'],
+        'Age': [24, 30, 28, 22, 35],
+        'Position': ['Forward', 'Midfielder', 'Forward', 'Defender', 'Midfielder'],
+        'Goals': [15, 5, 20, 2, 8],
+        'Salary': [50000, 60000, 70000, 40000, 75000]}
+df = pd.DataFrame(data)
+
+print("Top 5 players by goals:")
+print(df.nlargest(5, 'Goals')[['Name', 'Goals']])
+
+print("\nTop 5 players by salary:")
+print(df.nlargest(5, 'Salary')[['Name', 'Salary']])
+
+avg_age = df['Age'].mean()
+print(f"\nAverage Age: {avg_age:.2f}")
+print("Players above average age:")
+print(df[df['Age'] > avg_age][['Name', 'Age']])
+
+position_counts = df['Position'].value_counts()
+plt.bar(position_counts.index, position_counts.values, color='cyan')
+plt.title('Player Distribution by Position')
+plt.ylabel('Number of Players')
+plt.show()
