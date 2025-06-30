@@ -1,0 +1,27 @@
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = {'usage_minutes': [200, 300, 400, 500, 600],
+        'contract_duration': [12, 24, 12, 24, 12],
+        'churn': [0, 0, 1, 1, 0]}
+df = pd.DataFrame(data)
+
+X = df[['usage_minutes', 'contract_duration']]
+y = df['churn']
+
+model = LogisticRegression()
+model.fit(X, y)
+
+usage = float(input("Enter usage minutes: "))
+contract = int(input("Enter contract duration (months): "))
+prob = model.predict_proba([[usage, contract]])[0,1]
+prediction = model.predict([[usage, contract]])
+
+print("Churn prediction (0=No, 1=Yes):", prediction[0])
+print(f"Probability of churn: {prob:.2f}")
+
+plt.bar(['No Churn', 'Churn'], model.predict_proba([[usage, contract]])[0], color=['green', 'red'])
+plt.title('Predicted Churn Probability')
+plt.show()
