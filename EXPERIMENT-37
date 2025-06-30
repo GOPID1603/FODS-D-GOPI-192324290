@@ -1,0 +1,15 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+study_time = [1, 2, 3, 4, 5, 6, 7]
+exam_scores = [50, 55, 60, 65, 70, 80, 85]
+
+correlation = np.corrcoef(study_time, exam_scores)[0,1]
+print(f"Correlation Coefficient: {correlation:.2f}")
+
+plt.scatter(study_time, exam_scores, color='purple', s=100)
+plt.title('Study Time vs Exam Scores')
+plt.xlabel('Study Time (hours)')
+plt.ylabel('Exam Scores')
+plt.grid()
+plt.show()
