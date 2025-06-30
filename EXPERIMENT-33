@@ -1,0 +1,30 @@
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = {'engine_size': [2.0, 3.0, 2.5, 4.0, 3.5],
+        'horsepower': [150, 200, 180, 250, 220],
+        'fuel_efficiency': [30, 25, 28, 20, 22],
+        'price': [20000, 30000, 25000, 40000, 35000]}
+df = pd.DataFrame(data)
+
+X = df[['engine_size', 'horsepower', 'fuel_efficiency']]
+y = df['price']
+
+model = LinearRegression()
+model.fit(X, y)
+
+engine_size = float(input("Enter engine size: "))
+horsepower = float(input("Enter horsepower: "))
+fuel_efficiency = float(input("Enter fuel efficiency: "))
+pred_price = model.predict([[engine_size, horsepower, fuel_efficiency]])
+print(f"Predicted car price: ${pred_price[0]:.2f}")
+
+coefficients = model.coef_
+features = X.columns
+
+plt.bar(features, coefficients, color='skyblue')
+plt.title('Feature Influence on Car Price')
+plt.ylabel('Coefficient Value')
+plt.show()
